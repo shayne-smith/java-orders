@@ -10,7 +10,7 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long custcode;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String custcity;
     private String custname;
     private String grade;
