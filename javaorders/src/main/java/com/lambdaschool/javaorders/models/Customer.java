@@ -1,6 +1,6 @@
 package com.lambdaschool.javaorders.models;
 
-import org.hibernate.annotations.ManyToAny;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -15,6 +15,7 @@ public class Customer {
     private long custcode;
     
     private String custcity;
+    private String custcountry;
 
     @Column(nullable = false, unique = true)
     private String custname;
@@ -33,13 +34,15 @@ public class Customer {
     @OneToMany(mappedBy = "customer",
         cascade = CascadeType.ALL,
         orphanRemoval = true)
+    @JsonIgnoreProperties(value = "customers")
     private List<Order> orders = new ArrayList<>();
 
     public Customer() {
     }
 
-    public Customer(String custcity, String custname, String grade, double openingamt, double outstandingamt, double paymentamt, String phone, double receiveamt, String workingarea, Agent agent) {
+    public Customer(String custcity, String custcountry, String custname, String grade, double openingamt, double outstandingamt, double paymentamt, String phone, double receiveamt, String workingarea, Agent agent) {
         this.custcity = custcity;
+        this.custcountry = custcountry;
         this.custname = custname;
         this.grade = grade;
         this.openingamt = openingamt;
@@ -65,6 +68,14 @@ public class Customer {
 
     public void setCustcity(String custcity) {
         this.custcity = custcity;
+    }
+
+    public String getCustcountry() {
+        return custcountry;
+    }
+
+    public void setCustcountry(String custcountry) {
+        this.custcountry = custcountry;
     }
 
     public String getCustname() {
@@ -139,11 +150,20 @@ public class Customer {
         this.agent = agent;
     }
 
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
+
     @Override
     public String toString() {
         return "Customer{" +
                 "custcode=" + custcode +
                 ", custcity='" + custcity + '\'' +
+                ", custcountry='" + custcountry + '\'' +
                 ", custname='" + custname + '\'' +
                 ", grade='" + grade + '\'' +
                 ", openingamt=" + openingamt +
@@ -153,6 +173,7 @@ public class Customer {
                 ", receiveamt=" + receiveamt +
                 ", workingarea='" + workingarea + '\'' +
                 ", agent=" + agent +
+                ", orders=" + orders +
                 '}';
     }
 }

@@ -1,5 +1,7 @@
 package com.lambdaschool.javaorders.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,12 +21,14 @@ public class Order {
 
     @ManyToOne()
     @JoinColumn(name = "custcode", nullable = false)
+    @JsonIgnoreProperties(value = "orders")
     private Customer customer;
     
     @ManyToMany()
     @JoinTable(name = "orderspayments",
             joinColumns = @JoinColumn(name = "ordnum"),
             inverseJoinColumns = @JoinColumn(name = "paymentid"))
+    @JsonIgnoreProperties(value = "orders")
     private List<Payment> payments = new ArrayList<>();
 
     public Order() {
@@ -85,6 +89,7 @@ public class Order {
                 ", ordamount=" + ordamount +
                 ", orderdescription='" + orderdescription + '\'' +
                 ", customer=" + customer +
+                ", payments=" + payments +
                 '}';
     }
 }

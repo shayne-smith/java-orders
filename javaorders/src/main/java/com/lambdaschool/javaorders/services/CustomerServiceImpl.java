@@ -16,7 +16,7 @@ public class CustomerServiceImpl implements CustomerService {
     private CustomerRepository custrepos;
 
     @Override
-    public List<Customer> findAllCustomerOrders() {
+    public List<Customer> listAllCustomerOrders() {
         List<Customer> rtnList = new ArrayList<>();
 
         custrepos.findAll()
@@ -33,8 +33,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public List<Customer> findCustomerByLikeName(String thename) {
-
-        return custrepos.findByNameContainingIgnoringCase(thename);
+    public List<Customer> listCustomersByLikeName(String thename) {
+        return custrepos.findByCustnameContainingIgnoringCase(thename);
     }
 }
