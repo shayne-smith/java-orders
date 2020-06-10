@@ -1,6 +1,8 @@
 package com.lambdaschool.javaorders.models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "agents")
@@ -17,6 +19,17 @@ public class Agent {
     private String phone;
     private String workingarea;
 
+    @OneToMany(mappedBy = "agent",
+        cascade = CascadeType.ALL,
+        orphanRemoval = true)
+    private List<Customer> customers = new ArrayList<>();
+    
+    @ManyToMany()
+    @JoinTable(name = "orderspayments",
+        joinColumns = @JoinColumn(name = "agentcode"),
+        inverseJoinColumns = @JoinColumn(name = "paymentid"))
+    private List<Payment> payments = new ArrayList<>();
+    
     public Agent() {
     }
 

@@ -1,10 +1,9 @@
 package com.lambdaschool.javaorders.models;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "orders")
 public class Order {
 
     @Id
@@ -15,16 +14,19 @@ public class Order {
     private double advanceamount;
     private double ordamount;
     private String orderdescription;
-    private long custcode;
+
+    @ManyToOne()
+    @JoinColumn(name = "custcode")
+    private Customer customer;
 
     public Order() {
     }
 
-    public Order(double advanceamount, double ordamount, String orderdescription, long custcode) {
+    public Order(double advanceamount, double ordamount, String orderdescription, Customer customer) {
         this.advanceamount = advanceamount;
         this.ordamount = ordamount;
         this.orderdescription = orderdescription;
-        this.custcode = custcode;
+        this.customer = customer;
     }
 
     public long getOrdnum() {
@@ -59,12 +61,12 @@ public class Order {
         this.orderdescription = orderdescription;
     }
 
-    public long getCustcode() {
-        return custcode;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setCustcode(long custcode) {
-        this.custcode = custcode;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     @Override
@@ -74,7 +76,7 @@ public class Order {
                 ", advanceamount=" + advanceamount +
                 ", ordamount=" + ordamount +
                 ", orderdescription='" + orderdescription + '\'' +
-                ", custcode=" + custcode +
+                ", customer=" + customer +
                 '}';
     }
 }

@@ -1,5 +1,7 @@
 package com.lambdaschool.javaorders.models;
 
+import org.hibernate.annotations.ManyToAny;
+
 import javax.persistence.*;
 
 @Entity
@@ -9,9 +11,10 @@ public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long custcode;
-
-    @Column(nullable = false)
+    
     private String custcity;
+
+    @Column(nullable = false, unique = true)
     private String custname;
     private String grade;
     private double openingamt;
@@ -20,12 +23,15 @@ public class Customer {
     private String phone;
     private double receiveamt;
     private String workingarea;
-    private long agentcode;
+
+    @ManyToOne()
+    @JoinColumn(name = "agentcode", nullable = false)
+    private Agent agent;
 
     public Customer() {
     }
 
-    public Customer(String custcity, String custname, String grade, double openingamt, double outstandingamt, double paymentamt, String phone, double receiveamt, String workingarea, long agentcode) {
+    public Customer(String custcity, String custname, String grade, double openingamt, double outstandingamt, double paymentamt, String phone, double receiveamt, String workingarea, Agent agent) {
         this.custcity = custcity;
         this.custname = custname;
         this.grade = grade;
@@ -35,7 +41,7 @@ public class Customer {
         this.phone = phone;
         this.receiveamt = receiveamt;
         this.workingarea = workingarea;
-        this.agentcode = agentcode;
+        this.agent = agent;
     }
 
     public long getCustcode() {
@@ -118,12 +124,12 @@ public class Customer {
         this.workingarea = workingarea;
     }
 
-    public long getAgentcode() {
-        return agentcode;
+    public Agent getAgent() {
+        return agent;
     }
 
-    public void setAgentcode(long agentcode) {
-        this.agentcode = agentcode;
+    public void setAgent(Agent agent) {
+        this.agent = agent;
     }
 
     @Override
@@ -139,7 +145,7 @@ public class Customer {
                 ", phone='" + phone + '\'' +
                 ", receiveamt=" + receiveamt +
                 ", workingarea='" + workingarea + '\'' +
-                ", agentcode=" + agentcode +
+                ", agent=" + agent +
                 '}';
     }
 }
