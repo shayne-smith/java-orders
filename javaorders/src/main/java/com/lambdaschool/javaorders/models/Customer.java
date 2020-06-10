@@ -3,6 +3,8 @@ package com.lambdaschool.javaorders.models;
 import org.hibernate.annotations.ManyToAny;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "customers")
@@ -27,6 +29,11 @@ public class Customer {
     @ManyToOne()
     @JoinColumn(name = "agentcode", nullable = false)
     private Agent agent;
+
+    @OneToMany(mappedBy = "customer",
+        cascade = CascadeType.ALL,
+        orphanRemoval = true)
+    private List<Order> orders = new ArrayList<>();
 
     public Customer() {
     }

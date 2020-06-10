@@ -24,11 +24,11 @@ public class Agent {
         orphanRemoval = true)
     private List<Customer> customers = new ArrayList<>();
     
-    @ManyToMany()
-    @JoinTable(name = "orderspayments",
-        joinColumns = @JoinColumn(name = "agentcode"),
-        inverseJoinColumns = @JoinColumn(name = "paymentid"))
-    private List<Payment> payments = new ArrayList<>();
+//    @ManyToMany()
+//    @JoinTable(name = "orderspayments",
+//        joinColumns = @JoinColumn(name = "agentcode"),
+//        inverseJoinColumns = @JoinColumn(name = "paymentid"))
+//    private List<Payment> payments = new ArrayList<>();
     
     public Agent() {
     }

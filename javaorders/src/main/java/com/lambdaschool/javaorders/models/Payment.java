@@ -15,6 +15,7 @@ public class Payment {
     @Column(nullable = false, unique = true)
     private String type;
 
+    @ManyToMany(mappedBy = "payments")
     private List<Order> orders = new ArrayList<>();
 
 }

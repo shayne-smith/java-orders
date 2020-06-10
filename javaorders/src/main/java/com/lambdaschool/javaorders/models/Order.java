@@ -1,6 +1,8 @@
 package com.lambdaschool.javaorders.models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "orders")
@@ -16,8 +18,14 @@ public class Order {
     private String orderdescription;
 
     @ManyToOne()
-    @JoinColumn(name = "custcode")
+    @JoinColumn(name = "custcode", nullable = false)
     private Customer customer;
+    
+    @ManyToMany()
+    @JoinTable(name = "orderspayments",
+            joinColumns = @JoinColumn(name = "ordnum"),
+            inverseJoinColumns = @JoinColumn(name = "paymentid"))
+    private List<Payment> payments = new ArrayList<>();
 
     public Order() {
     }
