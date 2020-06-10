@@ -23,7 +23,7 @@ public class Order {
     @JoinColumn(name = "custcode", nullable = false)
     @JsonIgnoreProperties(value = "orders")
     private Customer customer;
-    
+
     @ManyToMany()
     @JoinTable(name = "orderspayments",
             joinColumns = @JoinColumn(name = "ordnum"),
@@ -73,6 +73,14 @@ public class Order {
         this.orderdescription = orderdescription;
     }
 
+    public List<Payment> getPayments() {
+        return payments;
+    }
+
+    public void setPayments(List<Payment> payments) {
+        this.payments = payments;
+    }
+
     public Customer getCustomer() {
         return customer;
     }
@@ -88,8 +96,8 @@ public class Order {
                 ", advanceamount=" + advanceamount +
                 ", ordamount=" + ordamount +
                 ", orderdescription='" + orderdescription + '\'' +
-                ", customer=" + customer +
                 ", payments=" + payments +
+                ", customer=" + customer +
                 '}';
     }
 }

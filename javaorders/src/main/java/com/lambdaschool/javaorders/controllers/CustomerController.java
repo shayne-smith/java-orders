@@ -1,7 +1,6 @@
 package com.lambdaschool.javaorders.controllers;
 
 import com.lambdaschool.javaorders.models.Customer;
-import com.lambdaschool.javaorders.services.AgentService;
 import com.lambdaschool.javaorders.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,7 +34,7 @@ public class CustomerController {
 
     // http://localhost:2019/customers/namelike/mes
     @GetMapping(value = "/namelike/{thename}")
-    public ResponseEntity<?> listCustomersByLikeName(String thename) {
+    public ResponseEntity<?> listCustomersByLikeName(@PathVariable String thename) {
         List<Customer> customers = customerService.listCustomersByLikeName(thename);
         return new ResponseEntity<>(customers, HttpStatus.OK);
     }

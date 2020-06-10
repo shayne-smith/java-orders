@@ -22,17 +22,17 @@ public class Agent {
     private String workingarea;
 
     @OneToMany(mappedBy = "agent",
-        cascade = CascadeType.ALL,
-        orphanRemoval = true)
-    @JsonIgnoreProperties(value = "agent")
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    @JsonIgnoreProperties(value = "agents")
     private List<Customer> customers = new ArrayList<>();
-    
+
 //    @ManyToMany()
 //    @JoinTable(name = "orderspayments",
 //        joinColumns = @JoinColumn(name = "agentcode"),
 //        inverseJoinColumns = @JoinColumn(name = "paymentid"))
 //    private List<Payment> payments = new ArrayList<>();
-    
+
     public Agent() {
     }
 
@@ -90,6 +90,14 @@ public class Agent {
 
     public void setWorkingarea(String workingarea) {
         this.workingarea = workingarea;
+    }
+
+    public List<Customer> getCustomers() {
+        return customers;
+    }
+
+    public void setCustomers(List<Customer> customers) {
+        this.customers = customers;
     }
 
     @Override

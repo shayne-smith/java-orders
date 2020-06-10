@@ -23,6 +23,5 @@ public class AgentController {
         return new ResponseEntity<>(a, HttpStatus.OK);
     }
 
-    
 
 }

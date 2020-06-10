@@ -17,7 +17,7 @@ public class OrderController {
     private OrderService orderService;
 
     // http://localhost:2019/orders/order/7
-    @GetMapping(value = "/order/{id}", produces= {"application/json"})
+    @GetMapping(value = "/order/{id}", produces = {"application/json"})
     public ResponseEntity<?> findOrderById(@PathVariable long id) {
         Order o = orderService.findOrderById(id);
         return new ResponseEntity<>(o, HttpStatus.OK);
